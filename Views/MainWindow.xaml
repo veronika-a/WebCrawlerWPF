@@ -1,0 +1,33 @@
+﻿<Window x:Class="WebCrawlerWPF.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:WebCrawlerWPF.ViewModels"
+        xmlns:local="clr-namespace:WebCrawlerWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" >
+
+            <StackPanel 
+                Orientation="Vertical" 
+                HorizontalAlignment="Center"  
+                VerticalAlignment="Center"
+                Margin="0">
+                <TextBlock Style="{StaticResource BaseTextBlock}">Скопируйте ссылку</TextBlock>
+                <TextBox Text="{Binding Link, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBox}" Margin="0 10 0 0" Width="300"/>
+                <Button  Command="{Binding Start}" Content="Начать" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
+                
+
+            </StackPanel>
+        </Grid>
+
+        
+
+    </Grid>
+</Window>

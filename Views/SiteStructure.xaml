@@ -1,0 +1,51 @@
+﻿<Window x:Class="WebCrawlerWPF.Views.SiteStructure"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebCrawlerWPF.Views"
+        mc:Ignorable="d"
+        Title="SiteStructure" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="6*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" >
+            <StackPanel 
+                Orientation="Vertical" 
+                HorizontalAlignment="Center"  
+                VerticalAlignment="Center"
+                Margin="0">
+                <TextBlock Style="{StaticResource BaseTextBlock}">Поиск по сайту</TextBlock>
+                <TextBox Text="{Binding Link, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBox}" Margin="0 10 0 0" Width="250"/>
+                <Button Content="Начать" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBlock FontSize="24" HorizontalAlignment="Center">Страницы сайта</TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBox x:Name="tbSearch" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 0" Style="{StaticResource BaseTextBox}" FontSize="14"/>
+
+            </Grid>
+            <Grid Grid.Row="2">
+                <ListBox Margin="10,10,9.5,10" Grid.ColumnSpan="3" SelectedItem="{Binding Path=SelectedLink, Mode=TwoWay}" ItemsSource="{Binding Links, UpdateSourceTrigger=PropertyChanged}">
+                </ListBox>
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</Window>
