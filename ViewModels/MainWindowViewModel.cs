@@ -45,9 +45,9 @@ namespace WebCrawlerWPF.ViewModels
                     (_start = new RelayCommand(obj => {
                         if (link != "")
                         {
-
+                            string oldlink="main";
                             
-                            SiteStructure siteStructure = new SiteStructure(ref link);
+                            SiteStructure siteStructure = new SiteStructure(ref link, ref oldlink);
                             //MWindow mWindow = new MWindow();
                             //mWindow.WindowFrame.Content = siteStructure;
                             siteStructure.Show();
