@@ -9,7 +9,8 @@ namespace WebCrawlerWPF.Models
     public class Site
     {
         public string Name { get; set; }
+        public SPage MainPage { get; set; }
         public List<SPage> Pages { get; set; } = new List<SPage>();
-        public List<SPage> Advertising { get; set; } = new List<SPage>();
+        
     }
 }
