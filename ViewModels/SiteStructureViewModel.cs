@@ -44,11 +44,14 @@ namespace WebCrawlerWPF.ViewModels
             List<string> p = new List<string>();
             foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//a"))
             {
-                var li = node.GetAttributeValue("href", null);
-                if (p.Find(u => u == (li))!=li) p.Add(li);
-                //var uri = new Uri(url, UriKind.RelativeOrAbsolute);
-
-                // p.Add(GetAbsoluteUrlString(url, node.GetAttributeValue("href", null)));
+                string link = node.GetAttributeValue("href", null);
+                if (link != null)
+                    if (p.Find(u => u == (link)) != link)
+                        if (link.Contains("http") == false & link.Contains("javascript:") == false)
+                        {        //  p.Add(link);
+                            var uri = new Uri(url, UriKind.RelativeOrAbsolute);
+                            p.Add(GetAbsoluteUrlString(url, link));
+                        }
             }
 
             page.Links.AddRange(p);
