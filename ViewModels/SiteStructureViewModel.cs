@@ -28,27 +28,47 @@ namespace WebCrawlerWPF.ViewModels
                 OnPropertyChanged(nameof(Page));
             }
         }
+        private Site site;
+        public Site Site
+        {
+            get { return site; }
+            set
+            {
+                site = value;
+                OnPropertyChanged(nameof(Site));
+            }
+        }
 
-       
 
         public SiteStructureViewModel( string link)
         {
+           // Site = new Site();
             Page = new SPage(link);
-            AddUrlString();
+           
+            AddUrlString(Page.Link);
+           // Site.Pages.Add(Page);
             Links = Page.Links;
            
         }
-
-        public void AddUrlString()
+        public void AddAllUrlString(string link)
         {
-            string url = Page.Link;
+            int i = 0;
+            while (i< 1000)
+            {
+
+                AddUrlString(Page.Links[i]);
+            }
+        }
+        public void AddUrlString(string plink)
+        {
+            string url = plink;
             HtmlWeb webDoc = new HtmlWeb();
             HtmlDocument doc = webDoc.Load(url);
             List<string> p = new List<string>();
             foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//a"))
             {
                 string link = node.GetAttributeValue("href", null);
-                if (link != null)
+                if (link != null & link!= page.Link)
                     if (p.Find(u => u == (link)) != link)
                         if (link.Contains("http") == false & link.Contains("javascript:") == false)
                         {        //  p.Add(link);
