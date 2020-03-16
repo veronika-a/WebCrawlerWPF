@@ -14,10 +14,13 @@ namespace WebCrawlerWPF.ViewModels
 {
     public class SiteStructureViewModel: INotifyPropertyChanged
     {
+        int i;
         public event EventHandler Closing;
         private RelayCommand _start;
         private RelayCommand _back;
+        private RelayCommand _newLink;
 
+        string oldLink;
         private SPage page;
         public SPage Page
         {
@@ -40,25 +43,35 @@ namespace WebCrawlerWPF.ViewModels
         }
 
 
-        public SiteStructureViewModel( string link)
+        public SiteStructureViewModel( string link, string oldlink)
         {
+            i = 0;
+            oldLink = oldlink;
             Site = new Site();
             Page = new SPage(link);
-           
-            AddUrlString(Page.Link);
+
+            page.Links.AddRange(AddUrlString(Page.Link));
+            AllLinks.AddRange(Links);
+            AddAllUrlString();
             Site.Pages.Add(Page);
             Links = Page.Links;
            
         }
-        public void AddAllUrlString(string link)
+        public void AddAllUrlString()
         {
-            int i = 0;
-            while (i< 1000)
+            string l = page.Links[i];
+            SPage Page = new SPage(l);
+            while (i< 100)
             {
-                AddUrlString(Page.Links[i]);
+                //if (Site.Pages.Find(u => u.Link == (l)) == null)
+                if(AllLinks.Find(u => u == (l)) == null)
+                {
+                    AllLinks.AddRange(AddUrlString(Page.Links[i+1]));
+                }
+                i++;
             }
         }
-        public void AddUrlString(string plink)
+        public List<string> AddUrlString(string plink)
         {
             string url = plink;
             HtmlWeb webDoc = new HtmlWeb();
@@ -76,7 +89,7 @@ namespace WebCrawlerWPF.ViewModels
                         }
             }
 
-            page.Links.AddRange(p);
+            return p;
         }
         List<string> _links;
 
@@ -90,14 +103,26 @@ namespace WebCrawlerWPF.ViewModels
             }
         }
 
-        private Page selectedPage;
-        public Page SelectedPage
+        List<string> _allLinks;
+
+        public List<string> AllLinks
         {
-            get { return selectedPage; }
+            get { return _allLinks; }
             set
             {
-                selectedPage = value;
-                OnPropertyChanged(nameof(SelectedPage));
+                _allLinks = value;
+                OnPropertyChanged(nameof(AllLinks));
+            }
+        }
+
+        private string selectedLink;
+        public string SelectedLink
+        {
+            get { return selectedLink; }
+            set
+            {
+                selectedLink = value;
+                OnPropertyChanged(nameof(SelectedLink));
             }
         }
         private string _search;
@@ -127,16 +152,6 @@ namespace WebCrawlerWPF.ViewModels
 
                 return _start ??
                     (_start = new RelayCommand(obj => {
-
-                        //var reader = new Reader()
-                        //{
-                        //    Email = this.email,
-                        //    Password = this.password
-                        //};
-                        //service1.registrationViewModel_signUp(reader);
-
-                        // CabinetReader cabinetReader = new CabinetReader(ref reader);
-                        //cabinetReader.Show();
                         Closing?.Invoke(this, EventArgs.Empty);
                     }));
             }
@@ -149,8 +164,32 @@ namespace WebCrawlerWPF.ViewModels
                 return _back ??
                     (_back = new RelayCommand(obj => {
 
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
+                       // if (oldLink == "main")
+                        {
+                            MainWindow mainWindow = new MainWindow();
+                            mainWindow.Show();
+                        }
+                        //else
+                        //{
+                        //    string oldLink = page.Link;
+                        //    SiteStructure siteStructure = new SiteStructure(ref oldLink,ref oldLink);
+                        //    siteStructure.Show();
+                        //}
+                        Closing?.Invoke(this, EventArgs.Empty);
+                    }));
+            }
+        }
+
+        public RelayCommand NewLink
+        {
+            get
+            {
+
+                return _newLink ??
+                    (_newLink = new RelayCommand(obj => {
+                        string oldLink = page.Link;
+                        SiteStructure siteStructure = new SiteStructure(ref selectedLink, ref oldLink);
+                        siteStructure.Show();
                         Closing?.Invoke(this, EventArgs.Empty);
                     }));
             }
