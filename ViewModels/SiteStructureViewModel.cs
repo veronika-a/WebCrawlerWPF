@@ -42,11 +42,11 @@ namespace WebCrawlerWPF.ViewModels
 
         public SiteStructureViewModel( string link)
         {
-           // Site = new Site();
+            Site = new Site();
             Page = new SPage(link);
            
             AddUrlString(Page.Link);
-           // Site.Pages.Add(Page);
+            Site.Pages.Add(Page);
             Links = Page.Links;
            
         }
@@ -55,7 +55,6 @@ namespace WebCrawlerWPF.ViewModels
             int i = 0;
             while (i< 1000)
             {
-
                 AddUrlString(Page.Links[i]);
             }
         }
@@ -90,9 +89,37 @@ namespace WebCrawlerWPF.ViewModels
                 OnPropertyChanged(nameof(Links));
             }
         }
-        public SiteStructureViewModel() { }
-        
 
+        private Page selectedPage;
+        public Page SelectedPage
+        {
+            get { return selectedPage; }
+            set
+            {
+                selectedPage = value;
+                OnPropertyChanged(nameof(SelectedPage));
+            }
+        }
+        private string _search;
+        public string Search
+        {
+            get { return _search; }
+            set
+            {
+                _search = value;
+                OnPropertyChanged(nameof(Search));
+                Links = search_thispagelinks(Page, Search);
+            }
+        }
+        public List<string> search_thispagelinks(SPage thispage, string Search)
+        {
+            List<string> SearchLinks = new List<string>();
+            foreach (var link in thispage.Links)
+            {
+                if(link.Contains(Search)) SearchLinks.Add(link);
+            }
+            return SearchLinks;
+        }
         public RelayCommand Start
         {
             get
