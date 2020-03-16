@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using WebCrawlerWPF.Models;
+using WebCrawlerWPF.Views;
 
 namespace WebCrawlerWPF.ViewModels
 {
     public class SiteStructureViewModel: INotifyPropertyChanged
     {
         public event EventHandler Closing;
+        private RelayCommand _start;
+        private RelayCommand _back;
 
         private SPage page;
         public SPage Page
@@ -26,7 +29,7 @@ namespace WebCrawlerWPF.ViewModels
             }
         }
 
-        private RelayCommand _start;
+       
 
         public SiteStructureViewModel( string link)
         {
@@ -87,6 +90,20 @@ namespace WebCrawlerWPF.ViewModels
 
                         // CabinetReader cabinetReader = new CabinetReader(ref reader);
                         //cabinetReader.Show();
+                        Closing?.Invoke(this, EventArgs.Empty);
+                    }));
+            }
+        }
+        public RelayCommand Back
+        {
+            get
+            {
+
+                return _back ??
+                    (_back = new RelayCommand(obj => {
+
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
                         Closing?.Invoke(this, EventArgs.Empty);
                     }));
             }
