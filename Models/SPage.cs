@@ -16,5 +16,6 @@ namespace WebCrawlerWPF.Models
         public string Title { get; set; }
         public string Link { get; set; }
         public List<string> Links { get; set; } = new List<string>();
+        //public List<string> Advertising { get; set; } = new List<string>();
     }
 }
