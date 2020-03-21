@@ -1,0 +1,54 @@
+﻿<Window x:Class="WebCrawlerWPF.Views.Search"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebCrawlerWPF.Views"
+        mc:Ignorable="d"
+        Title="Search" Height="450" Width="800">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="6*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" >
+            <StackPanel 
+                Orientation="Vertical" 
+                HorizontalAlignment="Center"  
+                VerticalAlignment="Center"
+                Margin="0">
+                <TextBlock Text="{Binding Page.Link}" Width="300px" FontSize="10px" Style="{StaticResource BaseTextBlock}"/>
+                <TextBlock Style="{StaticResource BaseTextBlock}">Поиск по странице</TextBlock>
+                <TextBox Text="{Binding NewSearchText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBox}" Margin="0 10 0 0" Width="300"/>
+                <Button Content="Найти на странице" Command="{Binding SearchText}" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
+                <Button Content="Сохранить" Command="{Binding }" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
+                <Button Content="На уровень выше" Command="{Binding }" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
+                <Button Content="На уровень ниже" Command="{Binding }" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
+                <Button Content="Назад" Command="{Binding Back}" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
+
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBlock FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center">Результат поиска</TextBlock>
+            </Grid>
+            <Grid Grid.Row="1">
+                <ListBox Margin="10,10,9.5,10" Grid.ColumnSpan="3" SelectedItem="{Binding Path=SelectedText, Mode=TwoWay}" ItemsSource="{Binding Text, UpdateSourceTrigger=PropertyChanged}">
+                </ListBox>
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</Window>
