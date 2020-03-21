@@ -57,9 +57,13 @@
     </ApplicationDefinition>
     <Compile Include="Models\SPage.cs" />
     <Compile Include="Models\Site.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SiteStructureViewModel.cs" />
     <Compile Include="Views\MWindow.xaml.cs">
       <DependentUpon>MWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Search.xaml.cs">
+      <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SiteStructure.xaml.cs">
       <DependentUpon>SiteStructure.xaml</DependentUpon>
@@ -79,6 +83,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Search.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
