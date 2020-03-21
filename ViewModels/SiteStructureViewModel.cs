@@ -19,6 +19,7 @@ namespace WebCrawlerWPF.ViewModels
         private RelayCommand _start;
         private RelayCommand _back;
         private RelayCommand _newLink;
+        private RelayCommand _search;
 
         string oldLink;
         private SPage page;
@@ -51,8 +52,8 @@ namespace WebCrawlerWPF.ViewModels
             Page = new SPage(link);
 
             page.Links.AddRange(AddUrlString(Page.Link));
-            AllLinks.AddRange(Links);
-            AddAllUrlString();
+           // AllLinks.AddRange(Links);
+           // AddUrlString();
             Site.Pages.Add(Page);
             Links = Page.Links;
            
@@ -64,11 +65,11 @@ namespace WebCrawlerWPF.ViewModels
             while (i< 100)
             {
                 //if (Site.Pages.Find(u => u.Link == (l)) == null)
-                if(AllLinks.Find(u => u == (l)) == null)
-                {
-                    AllLinks.AddRange(AddUrlString(Page.Links[i+1]));
-                }
-                i++;
+                //if(AllLinks.Find(u => u == (l)) == null)
+                //{
+                //    AllLinks.AddRange(AddUrlString(Page.Links[i+1]));
+                //}
+                //i++;
             }
         }
         public List<string> AddUrlString(string plink)
@@ -125,15 +126,15 @@ namespace WebCrawlerWPF.ViewModels
                 OnPropertyChanged(nameof(SelectedLink));
             }
         }
-        private string _search;
-        public string Search
+        private string _searchLink;
+        public string SearchLink
         {
-            get { return _search; }
+            get { return _searchLink; }
             set
             {
-                _search = value;
+                _searchLink = value;
                 OnPropertyChanged(nameof(Search));
-                Links = search_thispagelinks(Page, Search);
+                Links = search_thispagelinks(Page, SearchLink);
             }
         }
         public List<string> search_thispagelinks(SPage thispage, string Search)
@@ -194,7 +195,21 @@ namespace WebCrawlerWPF.ViewModels
                     }));
             }
         }
+        public RelayCommand Search
+        {
+            get
+            {
 
+                return _search ??
+                    (_search = new RelayCommand(obj => {
+
+                        Search search = new Search(ref page);
+                        search.Show();
+
+                        Closing?.Invoke(this, EventArgs.Empty);
+                    }));
+            }
+        }
         static string GetAbsoluteUrlString(string baseUrl, string url)
         {
             var uri = new Uri(url, UriKind.RelativeOrAbsolute);
