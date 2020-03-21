@@ -19,9 +19,7 @@
                 VerticalAlignment="Center"
                 Margin="0">
                 <TextBlock Text="{Binding Page.Link}" Width="300px" FontSize="10px" Style="{StaticResource BaseTextBlock}"/>
-                <TextBlock Style="{StaticResource BaseTextBlock}">Поиск по странице</TextBlock>
-                <TextBox Text="{Binding Link, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource BaseTextBox}" Margin="0 10 0 0" Width="300"/>
-                <Button Content="Найти" Margin="0 10 0 20" Style="{StaticResource BaseButton}"/>
+                <Button Content="Найти на странице" Command="{Binding Search}" Margin="0 10 0 20" Style="{StaticResource BaseButton}"/>
                 <Button Content="Перейти" Command="{Binding NewLink}" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
                 <Button Content="На главную" Command="{Binding Back}" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
 
@@ -40,7 +38,7 @@
                 <TextBlock FontSize="24" HorizontalAlignment="Center">Страницы сайта</TextBlock>
             </Grid>
             <Grid Grid.Row="1">
-                <TextBox x:Name="tbSearch" Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 0" Style="{StaticResource BaseTextBox}" FontSize="14"/>
+                <TextBox x:Name="tbSearch" Text="{Binding SearchLink, UpdateSourceTrigger=PropertyChanged}" Margin="10 0 10 0" Style="{StaticResource BaseTextBox}" FontSize="14"/>
 
             </Grid>
             <Grid Grid.Row="2">
