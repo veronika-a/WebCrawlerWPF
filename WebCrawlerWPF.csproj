@@ -57,6 +57,8 @@
     </ApplicationDefinition>
     <Compile Include="Models\SPage.cs" />
     <Compile Include="Models\Site.cs" />
+    <Compile Include="Patterns\Proxy.cs" />
+    <Compile Include="ViewModels\File.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SiteStructureViewModel.cs" />
     <Compile Include="Views\MWindow.xaml.cs">
@@ -125,6 +127,9 @@
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.22</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Files\HTMLPage1.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

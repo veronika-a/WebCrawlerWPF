@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WebCrawlerWPF.Models;
 
 namespace WebCrawlerWPF.ViewModels
@@ -67,6 +68,17 @@ namespace WebCrawlerWPF.ViewModels
             }
         }
 
+        private string _selectedText;
+        public string SelectedText
+        {
+            get { return _selectedText; }
+            set
+            {
+                _selectedText = value;
+                OnPropertyChanged(nameof(SelectedText));
+            }
+        }
+
         private RelayCommand _searchText;
         public RelayCommand SearchText
         {
@@ -82,7 +94,21 @@ namespace WebCrawlerWPF.ViewModels
                     }));
             }
         }
+        private RelayCommand _save;
+        public RelayCommand Save
+        {
+            get
+            {
 
+                return _save ??
+                    (_save = new RelayCommand(obj => {
+
+                        File file = new File(SelectedText);
+
+                        MessageBox.Show("Записть выполнена");
+                    }));
+            }
+        }
 
         #region PropertyChanged 
         public event PropertyChangedEventHandler PropertyChanged;

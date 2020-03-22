@@ -52,6 +52,7 @@ namespace WebCrawlerWPF.ViewModels
                             //mWindow.WindowFrame.Content = siteStructure;
                             siteStructure.Show();
                             Closing?.Invoke(this, EventArgs.Empty);
+                            
                         }
                     }));
             }
