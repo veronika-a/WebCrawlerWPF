@@ -14,7 +14,7 @@ namespace WebCrawlerWPF.Patterns
     
     public class ProxyFile :IMyFile
     {
-        private MyFile file= new MyFile();
+        private MyFile file;
 
         public ProxyFile()
         {
@@ -23,12 +23,20 @@ namespace WebCrawlerWPF.Patterns
         public void FileWrite(string text)
         {
             MessageBox.Show("Запись выполняеться...");
+            if (file == null)
+            {
+                file = new MyFile();
+            }
             file.FileWrite(text);
         }
 
         public void FileRead(string path)
         {
-            MessageBox.Show("Подождите");
+            MessageBox.Show("Подождите...");
+            if (file == null)
+            {
+                file = new MyFile();
+            }
             file.FileWrite(path);
         }
 
