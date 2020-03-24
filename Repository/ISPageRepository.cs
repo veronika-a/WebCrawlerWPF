@@ -5,13 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WebCrawlerWPF.Models;
 
-namespace WebCrawlerWPF.Patterns
+namespace WebCrawlerWPF.Repository
 {
-    
-    public class Proxy 
+    public interface ISPageRepository: IRepository<SPage>
     {
-       
     }
-
-
 }
