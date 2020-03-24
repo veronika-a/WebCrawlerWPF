@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using WebCrawlerWPF.Models;
+using WebCrawlerWPF.Patterns;
 
 namespace WebCrawlerWPF.ViewModels
 {
@@ -29,7 +30,7 @@ namespace WebCrawlerWPF.ViewModels
             List<string> nText = new List<string>();
             string stext = NewSearchText;
             HtmlWeb webDoc = new HtmlWeb();
-            HtmlDocument doc = webDoc.Load(page.Link);
+            HtmlDocument doc = webDoc.Load(page.PageLink);
             HtmlNodeCollection p = doc.DocumentNode.SelectNodes($".//*[p='{stext}']");
             if (p != null)
             {
@@ -103,9 +104,9 @@ namespace WebCrawlerWPF.ViewModels
                 return _save ??
                     (_save = new RelayCommand(obj => {
 
-                        File file = new File(SelectedText);
+                        IMyFile file = new ProxyFile();
+                        file.FileWrite(SelectedText);
 
-                        MessageBox.Show("Записть выполнена");
                     }));
             }
         }

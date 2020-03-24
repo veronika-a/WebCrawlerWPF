@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using WebCrawlerWPF.Models;
+using WebCrawlerWPF.Repository;
 using WebCrawlerWPF.Views;
 
 namespace WebCrawlerWPF.ViewModels
@@ -49,13 +50,19 @@ namespace WebCrawlerWPF.ViewModels
             i = 0;
             oldLink = oldlink;
             Site = new Site();
-            Page = new SPage(link);
+            using (WCContext appContext = new WCContext())
+            {
+                SPageRepository sPageRepository = new SPageRepository(appContext);
+                Page = new SPage(link);
+                page.Links.AddRange(AddUrlString(Page.PageLink));
+                sPageRepository.Insert(page);
 
-            page.Links.AddRange(AddUrlString(Page.Link));
-           // AllLinks.AddRange(Links);
-           // AddUrlString();
-            Site.Pages.Add(Page);
-            Links = Page.Links;
+                // AllLinks.AddRange(Links);
+                // AddUrlString();
+                Site.Pages.Add(Page);
+                Links = Page.Links;
+            }
+               
            
         }
         public void AddAllUrlString()
@@ -81,7 +88,7 @@ namespace WebCrawlerWPF.ViewModels
             foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//a"))
             {
                 string link = node.GetAttributeValue("href", null);
-                if (link != null & link!= page.Link)
+                if (link != null & link!= page.PageLink)
                     if (p.Find(u => u == (link)) != link)
                         if (link.Contains("http") == false & link.Contains("javascript:") == false)
                         {        //  p.Add(link);
@@ -188,7 +195,7 @@ namespace WebCrawlerWPF.ViewModels
 
                 return _newLink ??
                     (_newLink = new RelayCommand(obj => {
-                        string oldLink = page.Link;
+                        string oldLink = page.PageLink;
                         SiteStructure siteStructure = new SiteStructure(ref selectedLink, ref oldLink);
                         siteStructure.Show();
                         Closing?.Invoke(this, EventArgs.Empty);

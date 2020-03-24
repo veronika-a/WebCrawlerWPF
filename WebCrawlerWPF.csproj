@@ -61,15 +61,22 @@
     <Compile Include="Migrations\202003241222548_start.Designer.cs">
       <DependentUpon>202003241222548_start.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003241603054_new.cs" />
+    <Compile Include="Migrations\202003241603054_new.Designer.cs">
+      <DependentUpon>202003241603054_new.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SPage.cs" />
     <Compile Include="Models\Site.cs" />
+    <Compile Include="Models\Statistics.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\WCContext.cs" />
-    <Compile Include="Patterns\Proxy.cs" />
+    <Compile Include="Patterns\ProxyFile.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\ISPageRepository.cs" />
     <Compile Include="Repository\SPageRepository.cs" />
-    <Compile Include="ViewModels\File.cs" />
+    <Compile Include="ViewModels\MyFile.cs" />
+    <Compile Include="ViewModels\IMyFile.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SiteStructureViewModel.cs" />
     <Compile Include="Views\MWindow.xaml.cs">
@@ -124,6 +131,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\202003241222548_start.resx">
       <DependentUpon>202003241222548_start.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003241603054_new.resx">
+      <DependentUpon>202003241603054_new.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

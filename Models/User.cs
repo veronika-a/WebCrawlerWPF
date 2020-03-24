@@ -8,25 +8,20 @@ using System.Threading.Tasks;
 
 namespace WebCrawlerWPF.Models
 {
-    public class Site
+   public class User
     {
-        public Site()
+        public User(string username, string password)
         {
-        }
-
-        public Site(string name, SPage mainPage)
-        {
-            Name = name;
-            MainPage = mainPage;
+            Username = username;
+            Password = password;
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("Id")]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public SPage MainPage { get; set; }
-        public virtual List<SPage> Pages { get; set; } = new List<SPage>();
-        
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
     }
 }

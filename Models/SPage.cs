@@ -10,9 +10,16 @@ namespace WebCrawlerWPF.Models
 {
     public class SPage
     {
-        public SPage(string link)
+        public SPage(string pagelink)
         {
-            Link = link;
+            PageLink = pagelink;
+        }
+
+        public SPage(int id, string title, string pageLink)
+        {
+            Id = id;
+            Title = title;
+            PageLink = pageLink;
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,8 +27,9 @@ namespace WebCrawlerWPF.Models
         [Column("Id")]
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Link { get; set; }
-        public List<string> Links { get; set; } = new List<string>();
+        public string PageLink { get; set; }
+        
+        public  List<string> Links { get; set; } = new List<string>();
         //public List<string> Advertising { get; set; } = new List<string>();
     }
 }

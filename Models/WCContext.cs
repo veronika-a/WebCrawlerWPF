@@ -14,6 +14,9 @@
 
         public virtual DbSet<Site> Sites { get; set; }
         public virtual DbSet<SPage> SPages { get; set; }
+        public virtual DbSet<Statistics> Statistics { get; set; }
+
+        //public virtual DbSet<User> Users { get; set; }
     }
 
 }

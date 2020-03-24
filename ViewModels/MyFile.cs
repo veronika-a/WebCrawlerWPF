@@ -3,29 +3,40 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace WebCrawlerWPF.ViewModels
 {
-    public class File
+    public class MyFile:IMyFile
     {
-        public File() {
-            string writePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Files\\HTMLPage1.html");
+
+        private void Sleep()
+        {
+            
+                Thread.Sleep(5000);
+            
+        }
+        public MyFile() {
+            
+           
            // string text = "Привет мир!\nПока мир...";
           //  FileWrite(text);
-           FileRead(writePath);
+          // FileRead(writePath);
 
         }
-        public File(string text)
-        {
-           // string writePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Files\\HTMLPage1.html");
-          //  string text = "Привет мир!\nПока мир...";
-            FileWrite(text);
-            //FileRead(writePath);
+        //public MyFile(string text)
+        //{
+        //   // string writePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Files\\HTMLPage1.html");
+     
+        //    FileWrite(text);
+        //    //FileRead(writePath);
 
-        }
+        //}
         public void FileWrite(string text)
         {
+            Sleep();
             string writePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Files\\HTMLPage2.html");
             try
             {
@@ -39,7 +50,7 @@ namespace WebCrawlerWPF.ViewModels
                     sw.WriteLine("Дозапись");
                     sw.Write(4.5);
                 }
-                Console.WriteLine("Запись выполнена");
+                MessageBox.Show("Записть выполнена");
             }
             catch (Exception e)
             {
@@ -49,12 +60,14 @@ namespace WebCrawlerWPF.ViewModels
 
         public void FileRead(string path)
         {
+            string writePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Files\\HTMLPage1.html");
+            Sleep();
             using (StreamReader sr = new StreamReader(path, System.Text.Encoding.Default))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
-                    Console.WriteLine(line);
+                    MessageBox.Show(line);
                 }
             }
         }

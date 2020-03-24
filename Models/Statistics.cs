@@ -8,25 +8,26 @@ using System.Threading.Tasks;
 
 namespace WebCrawlerWPF.Models
 {
-    public class Site
+     public class Statistics
     {
-        public Site()
+        public Statistics(Site site)
         {
+            Site = site;
         }
 
-        public Site(string name, SPage mainPage)
+        public Statistics(int id, User user)
         {
-            Name = name;
-            MainPage = mainPage;
+            Id = id;
+            User = user;
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("Id")]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public SPage MainPage { get; set; }
-        public virtual List<SPage> Pages { get; set; } = new List<SPage>();
-        
+        public User User { get; set; } = new User("user","1111");
+        public Site Site { get; set; }
+        public int NumberOfVisits { get; set; } = 0;
+
     }
 }
