@@ -14,7 +14,7 @@ namespace WebCrawlerWPF.Models
         {
         }
 
-        public Site(string name, SPage mainPage)
+        public Site(string name, string mainPage)
         {
             Name = name;
             MainPage = mainPage;
@@ -25,7 +25,7 @@ namespace WebCrawlerWPF.Models
         [Column("Id")]
         public int Id { get; set; }
         public string Name { get; set; }
-        public SPage MainPage { get; set; }
+        public string MainPage { get; set; }
         public virtual List<SPage> Pages { get; set; } = new List<SPage>();
         
     }

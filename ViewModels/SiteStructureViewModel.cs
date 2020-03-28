@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using WebCrawlerWPF.Models;
 using WebCrawlerWPF.Repository;
@@ -45,11 +46,27 @@ namespace WebCrawlerWPF.ViewModels
         }
 
 
-        public SiteStructureViewModel( string link, string oldlink)
+        public SiteStructureViewModel(string link, string oldlink)
         {
+            string buf = "";
             i = 0;
             oldLink = oldlink;
-            Site = new Site();
+            if (link.Contains("https://") == true)
+                i += 8;
+            while (i < link.Length & link.Substring(i, 1) != "/")
+            {
+                buf += link.Substring(i, 1);
+                i++;
+            }
+
+            string url = "https://" + buf;
+            HtmlWeb webDoc = new HtmlWeb();
+            HtmlDocument doc = webDoc.Load(url);
+            string siteName = doc.DocumentNode.SelectNodes("//title").FirstOrDefault().InnerText;
+
+            MessageBox.Show(buf + " " + siteName);
+            Site = new Site(siteName, buf);
+
             using (WCContext appContext = new WCContext())
             {
                 SPageRepository sPageRepository = new SPageRepository(appContext);
@@ -57,28 +74,36 @@ namespace WebCrawlerWPF.ViewModels
                 page.Links.AddRange(AddUrlString(Page.PageLink));
                 sPageRepository.Insert(page);
 
-                // AllLinks.AddRange(Links);
-                // AddUrlString();
                 Site.Pages.Add(Page);
                 Links = Page.Links;
+                AllLinks=Links;
+                AddAllUrlString();
             }
-               
-           
         }
         public void AddAllUrlString()
         {
-            string l = page.Links[i];
-            SPage Page = new SPage(l);
-            while (i< 100)
+           int i = 0;
+            int c = 0;
+           // string l = page.Links[i];
+           // SPage Page = new SPage(l);
+            while (i < 100 & c!= AllLinks.Count)
             {
-                //if (Site.Pages.Find(u => u.Link == (l)) == null)
-                //if(AllLinks.Find(u => u == (l)) == null)
-                //{
-                //    AllLinks.AddRange(AddUrlString(Page.Links[i+1]));
-                //}
-                //i++;
+                var ll = AddUrlString(AllLinks[c]);
+               
+               foreach(var l in ll)
+                {
+                    if (AllLinks.Find(u => u == (l)) == null)
+                    {
+                        AllLinks.Add(l);
+                        i++;
+                    }
+                }
+                c++;
+                // MessageBox.Show(AllLinks.Count.ToString());
             }
+            MessageBox.Show("All links "+ AllLinks.Count.ToString());
         }
+
         public List<string> AddUrlString(string plink)
         {
             string url = plink;
@@ -88,15 +113,15 @@ namespace WebCrawlerWPF.ViewModels
             foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//a"))
             {
                 string link = node.GetAttributeValue("href", null);
-                if (link != null & link!= page.PageLink)
+                if (link != null & link != page.PageLink)
                     if (p.Find(u => u == (link)) != link)
                         if (link.Contains("http") == false & link.Contains("javascript:") == false)
                         {        //  p.Add(link);
                             var uri = new Uri(url, UriKind.RelativeOrAbsolute);
-                            p.Add(GetAbsoluteUrlString(url, link));
+                            if (GetAbsoluteUrlString(url, link).Contains("http"))
+                                p.Add(GetAbsoluteUrlString(url, link));
                         }
             }
-
             return p;
         }
         List<string> _links;
@@ -217,6 +242,7 @@ namespace WebCrawlerWPF.ViewModels
                     }));
             }
         }
+
         static string GetAbsoluteUrlString(string baseUrl, string url)
         {
             var uri = new Uri(url, UriKind.RelativeOrAbsolute);

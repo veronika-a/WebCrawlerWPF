@@ -31,19 +31,24 @@ namespace WebCrawlerWPF.ViewModels
             string stext = NewSearchText;
             HtmlWeb webDoc = new HtmlWeb();
             HtmlDocument doc = webDoc.Load(page.PageLink);
-            HtmlNodeCollection p = doc.DocumentNode.SelectNodes($".//*[p='{stext}']");
-            if (p != null)
-            {
-                foreach (var a in p)
-                {
-                    // Console.WriteLine(a.InnerText);
-                    Console.WriteLine(a.InnerHtml);
-                    nText.Add(a.InnerHtml);
-                }
-                Text = nText;
-            }
+            HtmlNodeCollection str;
+            HtmlNodeCollection p = doc.DocumentNode.SelectNodes($".//*[node()='{stext}']");
+            if (p != null) nText.AddRange( newSearch_foreach(p));
+            Text = nText;
         }
 
+        public List<string> newSearch_foreach(HtmlNodeCollection str)
+        {
+            List<string> list = new List<string>();
+            foreach (var t in str)
+            {
+                // Console.WriteLine(a.InnerText);
+                Console.WriteLine(t.InnerHtml);
+                list.Add(t.InnerHtml);
+            }
+            return list;
+
+        }
 
         private string _newSearchText;
         public string NewSearchText
