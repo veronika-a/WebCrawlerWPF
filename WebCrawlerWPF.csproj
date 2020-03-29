@@ -81,6 +81,7 @@
     <Compile Include="Repository\SPageRepository.cs" />
     <Compile Include="ViewModels\MyFile.cs" />
     <Compile Include="ViewModels\IMyFile.cs" />
+    <Compile Include="ViewModels\SearchText.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SiteStructureViewModel.cs" />
     <Compile Include="Views\MWindow.xaml.cs">

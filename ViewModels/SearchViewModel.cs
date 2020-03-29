@@ -25,30 +25,7 @@ namespace WebCrawlerWPF.ViewModels
 
 
 
-        public void newSearch()
-        {
-            List<string> nText = new List<string>();
-            string stext = NewSearchText;
-            HtmlWeb webDoc = new HtmlWeb();
-            HtmlDocument doc = webDoc.Load(page.PageLink);
-            HtmlNodeCollection str;
-            HtmlNodeCollection p = doc.DocumentNode.SelectNodes($".//*[node()='{stext}']");
-            if (p != null) nText.AddRange( newSearch_foreach(p));
-            Text = nText;
-        }
-
-        public List<string> newSearch_foreach(HtmlNodeCollection str)
-        {
-            List<string> list = new List<string>();
-            foreach (var t in str)
-            {
-                // Console.WriteLine(a.InnerText);
-                Console.WriteLine(t.InnerHtml);
-                list.Add(t.InnerHtml);
-            }
-            return list;
-
-        }
+        
 
         private string _newSearchText;
         public string NewSearchText
@@ -93,8 +70,8 @@ namespace WebCrawlerWPF.ViewModels
 
                 return _searchText ??
                     (_searchText = new RelayCommand(obj => {
-
-                        newSearch();
+                        SearchText search = new SearchText(NewSearchText, page.PageLink );
+                        Text =  search.newSearch();
                         
                        // Closing?.Invoke(this, EventArgs.Empty);
                     }));

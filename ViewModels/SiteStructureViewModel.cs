@@ -50,13 +50,15 @@ namespace WebCrawlerWPF.ViewModels
         {
             string buf = "";
             i = 0;
+            string sdf;
             oldLink = oldlink;
             if (link.Contains("https://") == true)
                 i += 8;
-            while (i < link.Length & link.Substring(i, 1) != "/")
+            while (i < link.Length)
             {
                 buf += link.Substring(i, 1);
                 i++;
+                if (link.Substring(i-1, 1) == "/") i = link.Length-1;
             }
 
             string url = "https://" + buf;
@@ -76,8 +78,8 @@ namespace WebCrawlerWPF.ViewModels
 
                 Site.Pages.Add(Page);
                 Links = Page.Links;
-                AllLinks=Links;
-                AddAllUrlString();
+                //AllLinks=Links;
+                //AddAllUrlString();
             }
         }
         public void AddAllUrlString()
