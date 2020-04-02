@@ -20,12 +20,10 @@ namespace WebCrawlerWPF.ViewModels
         {
             this.page = page;
             Text = new List<string>();
-           
+            RadioButton_page_Checked = true;
+           // RadioButton_site_Checked = false;
         }
 
-
-
-        
 
         private string _newSearchText;
         public string NewSearchText
@@ -62,6 +60,28 @@ namespace WebCrawlerWPF.ViewModels
             }
         }
 
+        private bool _RadioButton_page_Checked;
+        public bool RadioButton_page_Checked
+        {
+            get { return _RadioButton_page_Checked; }
+            set
+            {
+                _RadioButton_page_Checked = value;
+                OnPropertyChanged(nameof(RadioButton_page_Checked));
+            }
+        }
+
+        private bool _RadioButton_site_Checked;
+        public bool RadioButton_site_Checked
+        {
+            get { return _RadioButton_site_Checked; }
+            set
+            {
+                _RadioButton_site_Checked = value;
+                OnPropertyChanged(nameof(RadioButton_site_Checked));
+            }
+        }
+
         private RelayCommand _searchText;
         public RelayCommand SearchText
         {
@@ -70,8 +90,14 @@ namespace WebCrawlerWPF.ViewModels
 
                 return _searchText ??
                     (_searchText = new RelayCommand(obj => {
-                        SearchText search = new SearchText(NewSearchText, page.PageLink );
-                        Text =  search.newSearch();
+
+                        Receiver receiver = new Receiver( RadioButton_page_Checked, RadioButton_site_Checked);
+
+                        SearchInSite searchInSite = new SearchInSite(NewSearchText, page);
+                        SearchInPage searchInPage = new SearchInPage(NewSearchText, page);
+                        searchInPage.Successor = searchInSite;
+
+                        Text = searchInPage.HandleRequest(receiver);
                         
                        // Closing?.Invoke(this, EventArgs.Empty);
                     }));
