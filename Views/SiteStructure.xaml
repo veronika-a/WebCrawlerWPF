@@ -18,7 +18,7 @@
                 HorizontalAlignment="Center"  
                 VerticalAlignment="Center"
                 Margin="0">
-                <TextBlock Text="{Binding Page.Link}" Width="300px" FontSize="10px" Style="{StaticResource BaseTextBlock}"/>
+                <TextBlock Text="{Binding Page.PageLink}" Width="300px" FontSize="10px" Style="{StaticResource BaseTextBlock}"/>
                 <Button Content="Найти на странице" Command="{Binding Search}" Margin="0 10 0 20" Style="{StaticResource BaseButton}"/>
                 <Button Content="Перейти" Command="{Binding NewLink}" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
                 <Button Content="На главную" Command="{Binding Back}" Margin="0 10 0 0" Style="{StaticResource BaseButton}"/>
