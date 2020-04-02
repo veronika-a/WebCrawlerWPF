@@ -19,7 +19,7 @@ namespace WebCrawlerWPF.Patterns
         public ProxyFile()
         {
         }
-
+         /// Тут могут быть условия 
         public void FileWrite(string text)
         {
             MessageBox.Show("Запись выполняеться...");
@@ -31,7 +31,7 @@ namespace WebCrawlerWPF.Patterns
         }
 
         public void FileRead(string path)
-        {
+        { 
             MessageBox.Show("Подождите...");
             if (file == null)
             {
