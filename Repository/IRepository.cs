@@ -9,7 +9,7 @@ namespace WebCrawlerWPF.Repository
 {
     public interface IRepository<TEntity>
     {
-        void Insert(TEntity entity);
+        TEntity Insert(TEntity entity);
         void Update(TEntity entity);
         int GetCount();
         TEntity GetById(int id);
