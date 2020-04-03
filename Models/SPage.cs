@@ -10,6 +10,10 @@ namespace WebCrawlerWPF.Models
 {
     public class SPage
     {
+        public SPage()
+        {
+        }
+
         public SPage(string pagelink)
         {
             PageLink = pagelink;
