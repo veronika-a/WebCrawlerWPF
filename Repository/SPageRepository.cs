@@ -46,10 +46,17 @@ namespace WebCrawlerWPF.Repository
             throw new NotImplementedException();
         }
 
-        public void Insert(SPage entity)
+        public SPage Insert(SPage entity)
         {
-            _context.Entry(entity).State = EntityState.Added;
-            _context.SaveChanges();
+            var v = GetAll(u => u.PageLink == entity.PageLink).FirstOrDefault();
+          
+            if (v == null)
+            {
+                _context.Entry(entity).State = EntityState.Added;
+                _context.SaveChanges();
+                return entity;
+            }
+           else return v;
         }
 
         public void Update(SPage entity)
