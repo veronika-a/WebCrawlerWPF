@@ -79,6 +79,7 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\ISPageRepository.cs" />
     <Compile Include="Repository\SPageRepository.cs" />
+    <Compile Include="Repository\SPageRepositoryProxy.cs" />
     <Compile Include="ViewModels\MyFile.cs" />
     <Compile Include="ViewModels\IMyFile.cs" />
     <Compile Include="ViewModels\SearchInPage.cs" />
