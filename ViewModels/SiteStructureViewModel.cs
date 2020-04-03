@@ -71,12 +71,13 @@ namespace WebCrawlerWPF.ViewModels
 
             using (WCContext appContext = new WCContext())
             {
-                SPageRepository sPageRepository = new SPageRepository(appContext);
+                // SPageRepository sPageRepository = new SPageRepository(appContext);
+                SPageRepositoryProxy sPageRepositoryProxy = new SPageRepositoryProxy(appContext);
                 Page = new SPage(link);
-                page.Links.AddRange(AddUrlString(Page.PageLink));
-                sPageRepository.Insert(page);
-
+                
+                Page = sPageRepositoryProxy.Insert(page);
                 Site.Pages.Add(Page);
+                page.Links.AddRange(AddUrlString(Page.PageLink));
                 Links = Page.Links;
                 //AllLinks=Links;
                 //FindAllUrlString();
