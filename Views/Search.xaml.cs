@@ -30,5 +30,10 @@ namespace WebCrawlerWPF.Views
 
             viewModel.Closing += (s, e) => this.Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

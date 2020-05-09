@@ -6,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WebCrawlerWPF.FileSave;
 using WebCrawlerWPF.Models;
-using WebCrawlerWPF.Patterns;
 
 namespace WebCrawlerWPF.ViewModels
 {
@@ -15,13 +15,16 @@ namespace WebCrawlerWPF.ViewModels
     {
         public event EventHandler Closing;
         SPage page;
-
+        Document document;
+        DocHistory docHistory;
         public SearchViewModel(SPage page)
         {
             this.page = page;
             Text = new List<string>();
             RadioButton_page_Checked = true;
-           // RadioButton_site_Checked = false;
+             document = new Document();
+             docHistory = new DocHistory();
+            // RadioButton_site_Checked = false;
         }
 
 
@@ -112,8 +115,33 @@ namespace WebCrawlerWPF.ViewModels
                 return _save ??
                     (_save = new RelayCommand(obj => {
 
-                        IMyFile file = new ProxyFile();
-                        file.FileWrite(SelectedText);
+                        ////save in file
+                        //IMyFile file = new ProxyFile();
+                        // file.FileWrite(SelectedText);
+
+
+                        ////сохранение в Document and DocMomento
+                        docHistory.History.Push(document.SaveState());
+                        document.items.Add(SelectedText);
+                        
+                        MessageBox.Show(document.items.Count.ToString());
+
+                    }));
+            }
+        }
+        private RelayCommand _cancel;
+        public RelayCommand Cancel
+        {
+            get
+            {
+
+                return _cancel ??
+                    (_cancel = new RelayCommand(obj => {
+
+                        DocMemento docMemento = docHistory.History.Pop();
+                        document.RestoreState(docMemento);
+                        // document.RestoreState(docHistory.History.Pop());
+                        MessageBox.Show(document.items.Count.ToString());
 
                     }));
             }

@@ -23,7 +23,6 @@ namespace WebCrawlerWPF.ViewModels
         private RelayCommand _newLink;
         private RelayCommand _search;
 
-        string oldLink;
         private SPage page;
         public SPage Page
         {
@@ -46,12 +45,11 @@ namespace WebCrawlerWPF.ViewModels
         }
 
 
-        public SiteStructureViewModel(string link, string oldlink)
+        public SiteStructureViewModel(string link)
         {
             string buf = "";
             i = 0;
             string sdf;
-            oldLink = oldlink;
             if (link.Contains("https://") == true)
                 i += 8;
             while (i < link.Length)
@@ -223,8 +221,7 @@ namespace WebCrawlerWPF.ViewModels
 
                 return _newLink ??
                     (_newLink = new RelayCommand(obj => {
-                        string oldLink = page.PageLink;
-                        SiteStructure siteStructure = new SiteStructure(ref selectedLink, ref oldLink);
+                        SiteStructure siteStructure = new SiteStructure(ref selectedLink);
                         siteStructure.Show();
                         Closing?.Invoke(this, EventArgs.Empty);
                     }));

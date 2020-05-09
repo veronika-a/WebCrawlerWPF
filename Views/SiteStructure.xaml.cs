@@ -31,9 +31,9 @@ namespace WebCrawlerWPF.Views
         //    viewModel.Closing += (s, e) => this.Close();
         //}
 
-        public SiteStructure(ref string newlink, ref string oldlink)
+        public SiteStructure(ref string newlink)
         {
-            viewModel = new SiteStructureViewModel(newlink, oldlink);
+            viewModel = new SiteStructureViewModel(newlink);
             DataContext = viewModel;
             InitializeComponent();
            

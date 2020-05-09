@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FileSave\Document.cs" />
     <Compile Include="Migrations\202003241222548_start.cs" />
     <Compile Include="Migrations\202003241222548_start.Designer.cs">
       <DependentUpon>202003241222548_start.cs</DependentUpon>
@@ -75,7 +76,9 @@
     <Compile Include="Models\Statistics.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\WCContext.cs" />
-    <Compile Include="Patterns\ProxyFile.cs" />
+    <Compile Include="FileSave\DocHistory.cs" />
+    <Compile Include="FileSave\ProxyFile.cs" />
+    <Compile Include="FileSave\DocMemento.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\ISPageRepository.cs" />
     <Compile Include="Repository\SPageRepository.cs" />
