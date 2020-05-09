@@ -11,26 +11,26 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WebCrawlerWPF.FileSave;
 using WebCrawlerWPF.Models;
 using WebCrawlerWPF.ViewModels;
 
 namespace WebCrawlerWPF.Views
 {
     /// <summary>
-    /// Логика взаимодействия для SiteStructure.xaml
+    /// Логика взаимодействия для EditDocWindow.xaml
     /// </summary>
-    public partial class SiteStructure : Window
+    public partial class EditDoc : Window
     {
-        SiteStructureViewModel viewModel;
+        EditDocViewModel viewModel;
 
-        public SiteStructure(ref string newlink)
+        public EditDoc(ref SPage page,ref Document document)
         {
-            viewModel = new SiteStructureViewModel(newlink);
+            viewModel = new EditDocViewModel(page, document);
             DataContext = viewModel;
             InitializeComponent();
-           
+
             viewModel.Closing += (s, e) => this.Close();
         }
-       
     }
 }

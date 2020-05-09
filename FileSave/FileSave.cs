@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace WebCrawlerWPF.FileSave
 {
-   public class DocHistory
+    abstract public class FileSave
     {
-        public Stack<DocMemento> History { get; private set; }
-
-        public DocHistory()
+        public virtual void FileWrite(Document document)
         {
-            History = new Stack < DocMemento >();
-        }
 
+        }
+        public virtual void FileRead(string path)
+        {
+
+        }
+        
     }
 }

@@ -7,18 +7,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WebCrawlerWPF.ViewModels
+namespace WebCrawlerWPF.FileSave
 {
-    public class MyFile:IMyFile
+    public class MyFileSaveHtml: FileSave
     {
 
         private void Sleep()
         {
-            
-                Thread.Sleep(5000);
-            
+            Thread.Sleep(5000);
         }
-        public MyFile() {
+        public MyFileSaveHtml() {
             
            
            // string text = "Привет мир!\nПока мир...";
@@ -26,30 +24,32 @@ namespace WebCrawlerWPF.ViewModels
           // FileRead(writePath);
 
         }
+
         //public MyFile(string text)
         //{
         //   // string writePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Files\\HTMLPage1.html");
-     
+
         //    FileWrite(text);
         //    //FileRead(writePath);
 
         //}
-        public void FileWrite(string text)
+        public override void FileWrite(Document document)
         {
-            Sleep();
+            List<string> text = document.items;
             string writePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Files\\HTMLPage2.html");
             try
             {
                 using (StreamWriter sw = new StreamWriter(writePath, false, System.Text.Encoding.Default))
                 {
-                    sw.WriteLine(text);
+                    foreach(string st in text)
+                    {
+                        sw.Write("<p>");
+                        sw.WriteLine(st);
+                        sw.Write("</p>");
+                    }
+                    
                 }
 
-                using (StreamWriter sw = new StreamWriter(writePath, true, System.Text.Encoding.Default))
-                {
-                    sw.WriteLine("Дозапись");
-                    sw.Write(4.5);
-                }
                 MessageBox.Show("Записть выполнена");
             }
             catch (Exception e)
@@ -58,10 +58,10 @@ namespace WebCrawlerWPF.ViewModels
             }
         }
 
-        public void FileRead(string path)
+        public override void FileRead(string path)
         {
             string writePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\Files\\HTMLPage1.html");
-            Sleep();
+            
             using (StreamReader sr = new StreamReader(path, System.Text.Encoding.Default))
             {
                 string line;

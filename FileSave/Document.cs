@@ -8,8 +8,9 @@ using WebCrawlerWPF.FileSave;
 
 namespace WebCrawlerWPF.FileSave
 {
-    class Document
+    public class Document
     {
+        public int id;
         public List<string> items { get; set; } = new List<string>();
        
         public Document() { }

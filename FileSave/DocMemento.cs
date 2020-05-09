@@ -7,7 +7,7 @@ using WebCrawlerWPF.Models;
 
 namespace WebCrawlerWPF.FileSave
 {
-    class DocMemento
+    public class DocMemento
     {
         public List<string> Items { get; private set; }
         public DocMemento(List<string> items)

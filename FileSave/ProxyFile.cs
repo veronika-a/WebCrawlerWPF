@@ -12,9 +12,9 @@ using WebCrawlerWPF.ViewModels;
 namespace WebCrawlerWPF.FileSave
 {
     
-    public class ProxyFile :IMyFile
+    public class ProxyFile : FileSave
     {
-        private MyFile file;
+        private MyFileSaveHtml file;
 
         public ProxyFile()
         {
@@ -25,9 +25,9 @@ namespace WebCrawlerWPF.FileSave
             MessageBox.Show("Запись выполняеться...");
             if (file == null)
             {
-                file = new MyFile();
+                file = new MyFileSaveHtml();
             }
-            file.FileWrite(text);
+           // file.FileWrite(text);
         }
 
         public void FileRead(string path)
@@ -35,9 +35,9 @@ namespace WebCrawlerWPF.FileSave
             MessageBox.Show("Подождите...");
             if (file == null)
             {
-                file = new MyFile();
+                file = new MyFileSaveHtml();
             }
-            file.FileWrite(path);
+           // file.FileWrite(path);
         }
 
     }

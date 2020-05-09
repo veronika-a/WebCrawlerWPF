@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using WebCrawlerWPF.FileSave;
 using WebCrawlerWPF.Models;
+using WebCrawlerWPF.Views;
 
 namespace WebCrawlerWPF.ViewModels
 {
@@ -17,13 +18,14 @@ namespace WebCrawlerWPF.ViewModels
         SPage page;
         Document document;
         DocHistory docHistory;
+
         public SearchViewModel(SPage page)
         {
             this.page = page;
             Text = new List<string>();
             RadioButton_page_Checked = true;
-             document = new Document();
-             docHistory = new DocHistory();
+            document = new Document();
+            docHistory = new DocHistory();
             // RadioButton_site_Checked = false;
         }
 
@@ -38,8 +40,6 @@ namespace WebCrawlerWPF.ViewModels
                 OnPropertyChanged(nameof(NewSearchText));
             }
         }
-
-
         List<string> _text;
 
         public List<string> Text
@@ -102,7 +102,6 @@ namespace WebCrawlerWPF.ViewModels
 
                         Text = searchInPage.HandleRequest(receiver);
                         
-                       // Closing?.Invoke(this, EventArgs.Empty);
                     }));
             }
         }
@@ -142,6 +141,23 @@ namespace WebCrawlerWPF.ViewModels
                         document.RestoreState(docMemento);
                         // document.RestoreState(docHistory.History.Pop());
                         MessageBox.Show(document.items.Count.ToString());
+
+                    }));
+            }
+        }
+
+        private RelayCommand _editDoc;
+        public RelayCommand EditDoc
+        {
+            get
+            {
+
+                return _editDoc ??
+                    (_editDoc = new RelayCommand(obj => {
+
+                        EditDoc editDoc = new EditDoc(ref page,ref document);
+                        editDoc.Show();
+                        Closing?.Invoke(this, EventArgs.Empty);
 
                     }));
             }

@@ -1,13 +1,11 @@
-﻿<Window x:Class="WebCrawlerWPF.Views.Search"
+﻿<Window x:Class="WebCrawlerWPF.Views.EditDoc"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WebCrawlerWPF.Views"
         mc:Ignorable="d"
-        Title="Search" Height="450" Width="800">
-
-
+        Title="EditDoc" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"/>
@@ -20,7 +18,7 @@
                 HorizontalAlignment="Center"  
                 VerticalAlignment="Center"
                 Margin="0">
-                <TextBlock Style="{StaticResource BaseTextBlock}">Поиск по странице</TextBlock>
+                <TextBlock Style="{StaticResource BaseTextBlock}">Поиск по документу</TextBlock>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="8*"/>
@@ -35,36 +33,37 @@
                                 Style="{StaticResource BaseSButton}" />
                     </Grid>
                 </Grid>
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <RadioButton   x:Name="RadioButton_page" GroupName="SearchP" 
-                               Margin="5px" IsChecked="{Binding RadioButton_page_Checked}">page</RadioButton>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <RadioButton  x:Name="RadioButton_site" GroupName="SearchP" 
-                              Margin="5px" IsChecked="{Binding RadioButton_site_Checked}">site</RadioButton>
-                    </Grid>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Button Content="Сохранить в документ" Command="{Binding Save}" 
-                        Margin="0 0 10 0" Style="{StaticResource BaseSButton}" />
+                        <Button Content="Удалить" Command="{Binding Delete}" 
+                        Margin="0 10 10 0" Style="{StaticResource BaseSButton}" />
                     </Grid>
                     <Grid Grid.Column="1">
                         <Button Content="Отменить" Command="{Binding Cancel}" 
-                        Margin="0 0 0 0" Style="{StaticResource BaseSButton}" Click="Button_Click"/>
+                        Margin="0 10 0 0" Style="{StaticResource BaseSButton}" />
                     </Grid>
                 </Grid>
-                <Button Content="Редактировать документ" Command="{Binding EditDoc}" 
-                        Margin="0 20 0 0" Style="{StaticResource BaseButton}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <RadioButton   x:Name="RadioButton_page" GroupName="SaveRb" 
+                               Margin="0 20 0 0" IsChecked="{Binding RadioButton_html}">html</RadioButton>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <RadioButton  x:Name="RadioButton_site" GroupName="SaveRb" 
+                              Margin="0 20 0 0" IsChecked="{Binding RadioButton_doc}">doc</RadioButton>
+                    </Grid>
+                </Grid>
+                <Button Content="Скачать" Command="{Binding Save}" 
+                        Margin="0 10 0 0" Style="{StaticResource BaseButton}" />
 
 
 
@@ -79,7 +78,8 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock Text="{Binding Page.PageLink}" Width="300px" FontSize="10px" Style="{StaticResource BaseTextBlock}"/>
+                <TextBlock Text="{Binding Page.PageLink}" Width="300px" FontSize="10px" 
+                           Style="{StaticResource BaseTextBlock}"/>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
@@ -87,21 +87,15 @@
                     <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                <ListBox Margin="10" SelectedItem="{Binding Path=SelectedText, Mode=TwoWay}" ItemsSource="{Binding Text, UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
-               <!-- <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="304*"/>
+                        <ColumnDefinition Width="93*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Button Content="На уровень выше" FontSize="16" Command="{Binding }" Margin="10" Style="{StaticResource BaseButton}"/>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Button Content="На уровень ниже" FontSize="16" Command="{Binding }" Margin="10" Style="{StaticResource BaseButton}"/>
-                    </Grid>
+                    <ListBox Margin="10,10,9.5,10" SelectedItem="{Binding Path=SelectedText, Mode=TwoWay}" 
+                             ItemsSource="{Binding Text, UpdateSourceTrigger=PropertyChanged}" 
+                             Grid.ColumnSpan="2"/>
                 </Grid>
-                -->
+
             </Grid>
 
         </Grid>
