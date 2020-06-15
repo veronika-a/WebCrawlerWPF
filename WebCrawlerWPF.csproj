@@ -71,6 +71,14 @@
     <Compile Include="Migrations\202003281208199_s.Designer.cs">
       <DependentUpon>202003281208199_s.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006151757546_pldel.cs" />
+    <Compile Include="Migrations\202006151757546_pldel.Designer.cs">
+      <DependentUpon>202006151757546_pldel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006151802421_pladd.cs" />
+    <Compile Include="Migrations\202006151802421_pladd.Designer.cs">
+      <DependentUpon>202006151802421_pladd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SPage.cs" />
     <Compile Include="Models\Site.cs" />
@@ -155,6 +163,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003281208199_s.resx">
       <DependentUpon>202003281208199_s.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006151757546_pldel.resx">
+      <DependentUpon>202006151757546_pldel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006151802421_pladd.resx">
+      <DependentUpon>202006151802421_pladd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

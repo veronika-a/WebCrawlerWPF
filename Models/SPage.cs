@@ -23,7 +23,7 @@ namespace WebCrawlerWPF.Models
         {
             Id = id;
             Title = title;
-            PageLink = pageLink;
+           PageLink = pageLink;
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

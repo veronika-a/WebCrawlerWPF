@@ -72,10 +72,10 @@ namespace WebCrawlerWPF.ViewModels
                 // SPageRepository sPageRepository = new SPageRepository(appContext);
                 SPageRepositoryProxy sPageRepositoryProxy = new SPageRepositoryProxy(appContext);
                 Page = new SPage(link);
-                
-                Page = sPageRepositoryProxy.Insert(page);
+
+                  Page = sPageRepositoryProxy.Insert(page);
                 Site.Pages.Add(Page);
-                page.Links.AddRange(AddUrlString(Page.PageLink));
+                  page.Links.AddRange(AddUrlString(Page.PageLink));
                 Links = Page.Links;
                 //AllLinks=Links;
                 //FindAllUrlString();
@@ -114,8 +114,8 @@ namespace WebCrawlerWPF.ViewModels
             foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//a"))
             {
                 string link = node.GetAttributeValue("href", null);
-                if (link != null & link != page.PageLink)
-                    if (p.Find(u => u == (link)) != link)
+                   if (link != null & link != page.PageLink)
+                if (p.Find(u => u == (link)) != link)
                         if (link.Contains("http") == false & link.Contains("javascript:") == false)
                         {        //  p.Add(link);
                             var uri = new Uri(url, UriKind.RelativeOrAbsolute);

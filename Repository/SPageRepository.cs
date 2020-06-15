@@ -9,7 +9,7 @@ using WebCrawlerWPF.Models;
 
 namespace WebCrawlerWPF.Repository
 {
-  public  class SPageRepository: ISPageRepository
+  public  class SPageRepository   : ISPageRepository
     {
 
         DbContext _context;
@@ -45,7 +45,7 @@ namespace WebCrawlerWPF.Repository
         {
             throw new NotImplementedException();
         }
-
+ 
         public SPage Insert(SPage entity)
         {
             var v = GetAll(u => u.PageLink == entity.PageLink).FirstOrDefault();

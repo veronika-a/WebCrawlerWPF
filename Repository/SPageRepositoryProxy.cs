@@ -7,7 +7,7 @@ using WebCrawlerWPF.Models;
 
 namespace WebCrawlerWPF.Repository
 {
-    public class SPageRepositoryProxy : ISPageRepository
+    public class SPageRepositoryProxy    : ISPageRepository
     {
 
         List<SPage> pages;
@@ -57,19 +57,19 @@ namespace WebCrawlerWPF.Repository
             throw new NotImplementedException();
         }
 
-        public SPage Insert(SPage entity)
-        {
-            SPage page = pages.FirstOrDefault(p => p.PageLink == entity.PageLink);
+          public SPage Insert(SPage entity)
+         {
+             SPage page = pages.FirstOrDefault(p => p.PageLink == entity.PageLink);
 
-            if (page == null)
-            {
-                if (sPageRepository == null)
-                    sPageRepository = new SPageRepository(_context);
-                page = sPageRepository.Insert(entity);
-                pages.Add(page);
-            }
-            return page;
-        }
+             if (page == null)
+             {
+                 if (sPageRepository == null)
+                     sPageRepository = new SPageRepository(_context);
+                 page = sPageRepository.Insert(entity);
+                 pages.Add(page);
+             }
+             return page;
+         }
 
         public void Update(SPage entity)
         {

@@ -58,12 +58,12 @@ namespace WebCrawlerWPF.ViewModels
         {
             List<string> nText = new List<string>();
             HtmlWeb webDoc = new HtmlWeb();
-            HtmlDocument doc = webDoc.Load(thisPage.PageLink);
+              HtmlDocument doc = webDoc.Load(thisPage.PageLink);
             // HtmlNodeCollection p = doc.DocumentNode.SelectNodes($".//*[node()='{NewSearchText}']");
             // HtmlNodeCollection p = doc.DocumentNode.SelectNodes($".//*[contains(text(),'{NewSearchText}')]");
             //HtmlNodeCollection p = doc.DocumentNode.SelectNodes($".//*[text()[contains(normalize-space(),'{NewSearchText}')]]");
-             HtmlNodeCollection p = doc.DocumentNode.SelectNodes($".//*[contains(text(),'{NewSearchText}')]");
-            if (p != null) nText.AddRange(newSearch_foreach(p));
+               HtmlNodeCollection p = doc.DocumentNode.SelectNodes($".//*[contains(text(),'{NewSearchText}')]");
+              if (p != null) nText.AddRange(newSearch_foreach(p));
             return nText;
         }
 
@@ -111,7 +111,7 @@ namespace WebCrawlerWPF.ViewModels
         public List<string> newSearch()
         {
             List<string> nText = new List<string>();
-           AllLinks.AddRange(AddUrlString(thisPage.PageLink));
+              AllLinks.AddRange(AddUrlString(thisPage.PageLink));
 
             FindAllUrlString();
             foreach (var pl in AllLinks)
@@ -167,8 +167,8 @@ namespace WebCrawlerWPF.ViewModels
             foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//a"))
             {
                 string link = node.GetAttributeValue("href", null);
-                if (link != null & link != thisPage.PageLink)
-                    if (p.Find(u => u == (link)) != link)
+                  if (link != null & link != thisPage.PageLink)
+                if (p.Find(u => u == (link)) != link)
                         if (link.Contains("http") == false & link.Contains("javascript:") == false)
                         {        //  p.Add(link);
                             var uri = new Uri(url, UriKind.RelativeOrAbsolute);
