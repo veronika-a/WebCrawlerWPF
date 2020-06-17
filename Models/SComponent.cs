@@ -4,7 +4,7 @@ namespace WebCrawlerWPF.Models
 {
     public abstract class SComponent
     {
-        protected string Link;
+        public string Link;
         public SComponent()
         {
         }

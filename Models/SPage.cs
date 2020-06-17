@@ -15,7 +15,7 @@ namespace WebCrawlerWPF.Models
         {
         }
 
-        public SPage(string pagelink)
+        public SPage(string pagelink):base(pagelink)
         {
             PageLink = pagelink;
         }

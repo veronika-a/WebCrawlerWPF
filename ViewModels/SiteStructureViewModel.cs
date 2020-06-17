@@ -80,12 +80,13 @@ namespace WebCrawlerWPF.ViewModels
 
                  Links = Page.Links;//this page
                 //AllLinks = Site.ShowLinks();
-                AllLinks = Links;
+                AllLinks = new List<string>();
+                AllLinks.Add(Page.PageLink);
                 FindAllUrlString();
                 FindAllUrlStringII();
 
-                //  Links = Site.ShowLinks(); //AllLinks in Page
-                Links = AllLinks;
+                  Links = Site.ShowLinks(); //AllLinks
+                //Links = AllLinks;
             }
         }
         public void FindAllUrlString()
@@ -102,7 +103,6 @@ namespace WebCrawlerWPF.ViewModels
                 {
                     if (AllLinks.Find(u => u == (l)) == null)
                     {
-
                         AllLinks.Add(l);
                         i++;
                     }
@@ -117,7 +117,7 @@ namespace WebCrawlerWPF.ViewModels
             int i = 0;
             int c = 0;
             while (
-                //i < 100 &
+                i < 100 &
                 c != AllLinks.Count)
             {
                 var ll = AddUrlString(AllLinks[c]);
@@ -138,6 +138,7 @@ namespace WebCrawlerWPF.ViewModels
 
         public List<string> AddUrlString(string plink)
         {
+            SPage page = new SPage(plink);//II
             string url = plink;
             HtmlWeb webDoc = new HtmlWeb();
             HtmlDocument doc = webDoc.Load(url);
@@ -155,13 +156,10 @@ namespace WebCrawlerWPF.ViewModels
                             if (GetAbsoluteUrlString(url, link).Contains("http"))
                             {
                                 p.Add(GetAbsoluteUrlString(url, link));
-
-                                SPage page = new SPage(GetAbsoluteUrlString(url, link));//II
-                                {
-                                    Site.Add(page);
-                                    page.Links.Add(GetAbsoluteUrlString(url, link));//II
-
-                                }
+                                Site.Add(page);
+                                page.Links.Add(GetAbsoluteUrlString(url, link));//II
+                                    
+                                
                             }
                         }
             }

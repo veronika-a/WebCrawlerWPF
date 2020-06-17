@@ -32,6 +32,7 @@ namespace WebCrawlerWPF.Models
 
         public override void Add(SComponent component)
         {
+            if (components.Find(u => u.Link == (component.Link)) == null)
             components.Add(component);
         }
         public override void Add(List<SComponent> component)
