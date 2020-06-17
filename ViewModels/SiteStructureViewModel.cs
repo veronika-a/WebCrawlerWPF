@@ -74,11 +74,18 @@ namespace WebCrawlerWPF.ViewModels
                 Page = new SPage(link);
 
                   Page = sPageRepositoryProxy.Insert(page);
-                Site.Pages.Add(Page);
-                  page.Links.AddRange(AddUrlString(Page.PageLink));
-                Links = Page.Links;
-                //AllLinks=Links;
-                //FindAllUrlString();
+                Site.Pages.Add(Page); //del
+                Site.Add(Page);
+                  page.Links.AddRange(AddUrlString(Page.PageLink)); //del
+
+                 Links = Page.Links;//this page
+                //AllLinks = Site.ShowLinks();
+                AllLinks = Links;
+                FindAllUrlString();
+                FindAllUrlStringII();
+
+                //  Links = Site.ShowLinks(); //AllLinks in Page
+                Links = AllLinks;
             }
         }
         public void FindAllUrlString()
@@ -95,6 +102,7 @@ namespace WebCrawlerWPF.ViewModels
                 {
                     if (AllLinks.Find(u => u == (l)) == null)
                     {
+
                         AllLinks.Add(l);
                         i++;
                     }
@@ -102,7 +110,30 @@ namespace WebCrawlerWPF.ViewModels
                 c++;
                 // MessageBox.Show(AllLinks.Count.ToString());
             }
-            MessageBox.Show("All links "+ AllLinks.Count.ToString());
+            MessageBox.Show("All links I "+ AllLinks.Count.ToString());
+        }
+        public void FindAllUrlStringII()
+        {
+            int i = 0;
+            int c = 0;
+            while (
+                //i < 100 &
+                c != AllLinks.Count)
+            {
+                var ll = AddUrlString(AllLinks[c]);
+                
+                foreach (var l in ll)
+                {
+                    if (AllLinks.Find(u => u == (l)) == null)
+                    {
+                        AllLinks.Add(l);
+                        i++;
+                    }   
+                }
+                c++;
+                // MessageBox.Show(AllLinks.Count.ToString());
+            }
+            MessageBox.Show("All links II" + AllLinks.Count.ToString());
         }
 
         public List<string> AddUrlString(string plink)
@@ -114,13 +145,24 @@ namespace WebCrawlerWPF.ViewModels
             foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//a"))
             {
                 string link = node.GetAttributeValue("href", null);
-                   if (link != null & link != page.PageLink)
-                if (p.Find(u => u == (link)) != link)
-                        if (link.Contains("http") == false & link.Contains("javascript:") == false)
+                if (link != null & link != page.PageLink)
+                    if (p.Find(u => u == (link)) != link)
+                        if (link.Contains("http") == false & 
+                            link.Contains("javascript:") == false &
+                             link.Contains("tel:") == false)
                         {        //  p.Add(link);
                             var uri = new Uri(url, UriKind.RelativeOrAbsolute);
                             if (GetAbsoluteUrlString(url, link).Contains("http"))
+                            {
                                 p.Add(GetAbsoluteUrlString(url, link));
+
+                                SPage page = new SPage(GetAbsoluteUrlString(url, link));//II
+                                {
+                                    Site.Add(page);
+                                    page.Links.Add(GetAbsoluteUrlString(url, link));//II
+
+                                }
+                            }
                         }
             }
             return p;

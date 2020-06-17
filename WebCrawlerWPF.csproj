@@ -80,6 +80,7 @@
       <DependentUpon>202006151802421_pladd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\SComponent.cs" />
     <Compile Include="Models\SPage.cs" />
     <Compile Include="Models\Site.cs" />
     <Compile Include="Models\Statistics.cs" />
