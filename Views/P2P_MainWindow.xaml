@@ -1,0 +1,45 @@
+﻿<Window x:Class="WebCrawlerWPF.Views.P2P_MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebCrawlerWPF.Views"
+        mc:Ignorable="d"
+        Title="P2P_MainWindow" Height="400" Width="400"  Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Resources>
+        
+        <DataTemplate x:Key="PeerEntryDataTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+               
+                <TextBlock Margin="10" Text="{Binding Path=DisplayString}" Padding="4" TextWrapping="Wrap" Width="150" Opacity="0.995" FontFamily="Calibri" FontSize="14" Foreground="Black" >
+                    
+                </TextBlock>
+              
+                <StackPanel Grid.Column="1">
+                    <Button Name="MessageButton" Margin="10,10,10,10" Height="50" IsEnabled="{Binding Path=ButtonsEnabled}"   Content="Message" BorderBrush="{DynamicResource bevelBrush}" Background="#FF207FAC"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+  
+
+    <StackPanel>
+        <Button Name="RefreshButton" Click="RefreshButton_Click"  Style="{StaticResource BaseButton}" FontSize="15px" >Обновить</Button>
+        <ListBox Name="PeerList" ItemTemplate="{DynamicResource PeerEntryDataTemplate}" ButtonBase.Click="PeerList_Click" Background="{x:Null}" BorderBrush="{x:Null}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="10" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </StackPanel>
+</Window>

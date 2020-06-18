@@ -47,6 +47,7 @@ namespace WebCrawlerWPF.ViewModels
 
         public SiteStructureViewModel(string link)
         {
+            if (link == null) return ;
             string buf = "";
             i = 0;
             string sdf;

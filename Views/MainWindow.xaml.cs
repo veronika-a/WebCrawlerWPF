@@ -28,6 +28,11 @@ namespace WebCrawlerWPF.Views
             DataContext = viewModel;
             viewModel.Closing += (s, e) => this.Close();
         }
-        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            P2P_MainWindow p2p = new P2P_MainWindow();
+            p2p.Show();
+        }
     }
 }

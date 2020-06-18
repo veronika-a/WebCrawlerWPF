@@ -36,9 +36,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -89,6 +92,9 @@
     <Compile Include="FileSave\DocHistory.cs" />
     <Compile Include="FileSave\ProxyFile.cs" />
     <Compile Include="FileSave\DocMemento.cs" />
+    <Compile Include="P2P\IP2PService.cs" />
+    <Compile Include="P2P\P2PService.cs" />
+    <Compile Include="P2P\PeerEntry.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\ISPageRepository.cs" />
     <Compile Include="Repository\SPageRepository.cs" />
@@ -104,6 +110,9 @@
     </Compile>
     <Compile Include="Views\MWindow.xaml.cs">
       <DependentUpon>MWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\P2P_MainWindow.xaml.cs">
+      <DependentUpon>P2P_MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
@@ -130,6 +139,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\P2P_MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
