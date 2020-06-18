@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using WebCrawlerWPF.FileSave;
 
 namespace WebCrawlerWPF.P2P
 {

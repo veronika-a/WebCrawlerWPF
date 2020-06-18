@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WebCrawlerWPF.FileSave;
 using WebCrawlerWPF.P2P;
 
 namespace WebCrawlerWPF.Views
@@ -26,12 +27,17 @@ namespace WebCrawlerWPF.Views
         private ServiceHost host;
         private PeerName peerName;
         private PeerNameRegistration peerNameRegistration;
+        private string message;
 
         public P2P_MainWindow()
         {
             InitializeComponent();
         }
-
+        public P2P_MainWindow(string newmessage)
+        {
+            InitializeComponent();
+            message = newmessage;
+        }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Получение конфигурационной информации из app.config
@@ -186,7 +192,10 @@ namespace WebCrawlerWPF.Views
                 {
                     try
                     {
-                        peerEntry.ServiceProxy.SendMessage("Привет друг!", ConfigurationManager.AppSettings["username"]);
+                        if (message != null)
+                            peerEntry.ServiceProxy.SendMessage(message, ConfigurationManager.AppSettings["username"]);
+                        else 
+                            peerEntry.ServiceProxy.SendMessage("Привет!", ConfigurationManager.AppSettings["username"]);
                     }
                     catch (CommunicationException)
                     {

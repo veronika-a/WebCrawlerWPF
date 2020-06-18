@@ -23,7 +23,7 @@
                 </TextBlock>
               
                 <StackPanel Grid.Column="1">
-                    <Button Name="MessageButton" Margin="10,10,10,10" Height="50" IsEnabled="{Binding Path=ButtonsEnabled}"   Content="Message" BorderBrush="{DynamicResource bevelBrush}" Background="#FF207FAC"/>
+                    <Button Name="MessageButton" Margin="10,10,10,10" Height="50" IsEnabled="{Binding Path=ButtonsEnabled}"   Content="Send" BorderBrush="{DynamicResource bevelBrush}" Background="#FF207FAC"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>

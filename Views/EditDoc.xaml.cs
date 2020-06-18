@@ -23,14 +23,27 @@ namespace WebCrawlerWPF.Views
     public partial class EditDoc : Window
     {
         EditDocViewModel viewModel;
+        Document document;
 
         public EditDoc(ref SPage page,ref Document document)
         {
             viewModel = new EditDocViewModel(page, document);
             DataContext = viewModel;
             InitializeComponent();
+            this.document = document;
 
             viewModel.Closing += (s, e) => this.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string message ="";
+            foreach (string d in document.items) 
+            {
+                message = message +"//"+ d;
+            }
+            P2P_MainWindow p2P_MainWindow = new P2P_MainWindow(message);
+            p2P_MainWindow.Show();
         }
     }
 }
